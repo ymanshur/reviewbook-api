@@ -6,19 +6,22 @@ class Api::V1::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all
-    json_response 'index reviews successfully', true, { reviews: @reviews }, :ok
+    reviews_serializer = parse_json @reviews
+    json_response 'index reviews successfully', true, { reviews: reviews_serializer }, :ok
   end
 
   def show
-    json_response 'show review successfully', true, { review: @review }, :ok
+    review_serializer = parse_json @review
+    json_response 'show review successfully', true, { review: review_serializer }, :ok
   end
 
   def create
     review = Review.new review_params
     review.user_id = current_user.id
     review.book_id = params[:book_id]
+    review_serializer = parse_json @review
     if review.save
-      json_response 'created review successfully', true, { review: }, :ok
+      json_response 'created review successfully', true, { review: review_serializer }, :ok
     else
       json_response 'created review fail', false, {}, :unprocessable_entity
     end
@@ -27,7 +30,8 @@ class Api::V1::ReviewsController < ApplicationController
   def update
     if correct_user @review.user
       if @review.update review_params
-        json_response 'updated review successfully', true, { review: @review }, :ok
+        review_serializer = parse_json @review
+        json_response 'updated review successfully', true, { review: review_serializer }, :ok
       else
         json_response 'updated review fail', false, {}, :unprocessable_entity
       end
@@ -39,7 +43,7 @@ class Api::V1::ReviewsController < ApplicationController
   def destroy
     if correct_user @review.user
       if @review.destroy
-        json_response 'deleted review successfully', true, { review: @review }, :ok
+        json_response 'deleted review successfully', true, {}, :ok
       else
         json_response 'deleted review fail', false, {}, :unprocessable_entity
       end
