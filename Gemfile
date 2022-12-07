@@ -48,3 +48,5 @@ gem 'koala'
 gem 'faker'
 
 gem 'active_model_serializers'
+
+gem 'counter_culture'
