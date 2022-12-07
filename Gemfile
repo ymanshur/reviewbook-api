@@ -44,3 +44,5 @@ gem 'devise'
 gem 'simple_token_authentication'
 
 gem 'koala'
+
+gem 'faker'
