@@ -52,3 +52,5 @@ gem 'koala'
 gem 'active_model_serializers'
 
 gem 'counter_culture'
+
+gem 'kt-paperclip'

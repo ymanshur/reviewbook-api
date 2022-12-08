@@ -19,8 +19,8 @@ class Api::V1::ReviewsController < ApplicationController
     review = Review.new review_params
     review.user_id = current_user.id
     review.book_id = params[:book_id]
-    review_serializer = parse_json @review
     if review.save
+      review_serializer = parse_json review
       json_response 'created review successfully', true, { review: review_serializer }, :ok
     else
       json_response 'created review fail', false, {}, :unprocessable_entity
@@ -69,7 +69,7 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:title, :content_rating, :recommend_rating)
+    params.require(:review).permit(:title, :content_rating, :recommend_rating, :image_review)
   end
 
   def ensure_params_exist
