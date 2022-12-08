@@ -36,6 +36,8 @@ group :development do
   gem 'spring'
 
   gem 'bullet'
+
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -46,8 +48,6 @@ gem 'devise'
 gem 'simple_token_authentication'
 
 gem 'koala'
-
-gem 'faker'
 
 gem 'active_model_serializers'
 
